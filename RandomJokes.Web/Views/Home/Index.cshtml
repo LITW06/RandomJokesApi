@@ -1,0 +1,42 @@
+﻿@model IndexViewModel
+
+<div class="row">
+    <div class="col-md-6 col-md-offset-3 well">
+        <h4>@Model.Joke.Setup</h4>
+        <h4>@Model.Joke.Punchline</h4>
+        <input type="hidden" id="joke-id" data-joke-id="@Model.Joke.Id"/>
+        <div>
+            @if (Model.InteractionStatus == UserJokeInteractionStatus.NeverInteracted)
+            {
+                <button class="btn btn-primary" id="like">Like</button>
+                <button class="btn btn-danger" id="dislike">Dislike</button>
+            }
+            else if (Model.InteractionStatus == UserJokeInteractionStatus.Liked)
+            {
+                <button class="btn btn-primary" id="like" disabled>Like</button>
+                <button class="btn btn-danger" id="dislike">Dislike</button>
+            }
+            else if (Model.InteractionStatus == UserJokeInteractionStatus.Disliked)
+            {
+                <button class="btn btn-primary" id="like">Like</button>
+                <button class="btn btn-danger" id="dislike" disabled>Dislike</button>
+            }
+            else if (Model.InteractionStatus == UserJokeInteractionStatus.CanNoLongerInteract)
+            {
+                <h5 style="color: red;">You can no longer interact with this joke</h5>
+            }
+            else
+            {
+                <a href="/account/login">Login to your account to like/dislike this joke</a>
+            }
+            <br />
+            <h4>Likes: <span id="likes-count"></span></h4>
+            <h4>Dislikes: <span id="dislikes-count"></span></h4>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <script src="/js/index.js"></script>
+}

@@ -1,0 +1,16 @@
+﻿@model System.Collections.Generic.IEnumerable<RandomJokes.Data.Joke>
+
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        @foreach (var joke in Model)
+        {
+            <div class="well">
+                <h5>@joke.Setup</h5>
+                <h5>@joke.Punchline</h5>
+                <span>Likes: @joke.UserJokeLikes.Count(j => j.Like)</span>
+                <br />
+                <span>Dislikes: @joke.UserJokeLikes.Count(j => !j.Like)</span>
+            </div>
+        }
+    </div>
+</div>
